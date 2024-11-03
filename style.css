@@ -630,8 +630,13 @@ body {
     color: var(--pg-text);
     cursor: pointer;
     padding: 0.5rem;
-    border-radius: 12px;
+    border-radius: 8px;
     transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pg-settings-btn:hover {
@@ -655,31 +660,46 @@ body {
     inset-inline-end: 0;
 }
 
-.pg-settings-header {
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--pg-border);
-}
-
-.pg-settings-header h2 {
-    margin: 0;
-    color: var(--pg-text);
-    font-size: 1.25rem;
-}
-
+/* تحديث زر الإغلاق */
 .pg-settings-close {
     background: none;
     border: none;
     color: var(--pg-text);
     cursor: pointer;
     padding: 0.5rem;
-    border-radius: 12px;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
 .pg-settings-close:hover {
     background-color: var(--pg-hover-bg);
+}
+
+.pg-settings-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* تحديث رأس الإعدادات */
+.pg-settings-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--pg-border);
+    height: 60px; /* ارتفاع ثابت */
+}
+
+.pg-settings-header h2 {
+    margin: 0;
+    color: var(--pg-text);
+    font-size: 1.25rem;
+    font-weight: 500;
 }
 
 .pg-settings-content {
@@ -824,11 +844,17 @@ body {
     color: var(--pg-text);
     cursor: pointer;
     padding: 0.5rem;
-    border-radius: 12px;
+    border-radius: 8px;
+    height: 40px;
 }
 
 .pg-back-btn:hover {
     background-color: var(--pg-hover-bg);
+}
+
+.pg-back-btn svg {
+    width: 20px;
+    height: 20px;
 }
 
 .pg-languages-content {
@@ -924,21 +950,21 @@ body {
 
 /* دعم RTL */
 [dir="rtl"] .pg-password__input {
-    padding: 0 1.25rem 0 58px;
+    padding: 0 58px 0 1.25rem;
 }
 
 [dir="rtl"] .pg-password__copy {
-    right: auto;
-    left: 8px;
+    right: 8px;
+    left: auto;
 }
 
 [dir="rtl"] .pg-option {
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 
 [dir="rtl"] .pg-option__checkbox {
-    margin-right: 1rem;
-    margin-left: 0;
+    margin-right: 0;
+    margin-left: 1rem;
 }
 
 [dir="rtl"] .pg-settings-btn {
