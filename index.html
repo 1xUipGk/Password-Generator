@@ -251,6 +251,39 @@
                     </div>
                 </div>
 
+                <!-- إضافة زر السجل في قائمة الإعدادات -->
+                <div class="pg-settings-item">
+                    <label>Password History</label>
+                    <div class="pg-history-btn" onclick="togglePasswordHistory()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M13.5 8H12v5l4.28 2.54l.72-1.21l-3.5-2.08V8M13 3a9 9 0 0 0-9 9H1l3.96 4.03L9 12H6a7 7 0 0 1 7-7a7 7 0 0 1 7 7a7 7 0 0 1-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.896 8.896 0 0 0 13 21a9 9 0 0 0 9-9a9 9 0 0 0-9-9"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- تحديث قائمة السجل -->
+                <div class="pg-history-list" id="historyList">
+                    <div class="pg-history-header">
+                        <button class="pg-back-btn" onclick="hidePasswordHistory()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8l8 8l1.41-1.41L7.83 13H20v-2z"/>
+                            </svg>
+                            <span>Password History</span>
+                        </button>
+                    </div>
+                    <div class="pg-history-content" id="historyContent">
+                        <!-- سيتم ملء هذا القسم ديناميكياً -->
+                    </div>
+                    <div class="pg-history-footer">
+                        <button class="pg-clear-history" onclick="clearPasswordHistory()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z"/>
+                            </svg>
+                            Clear History
+                        </button>
+                    </div>
+                </div>
+
                 <!-- زر إعادة الضبط -->
                 <button class="pg-reset-btn" onclick="resetSettings()">
                     Reset Settings
@@ -265,6 +298,18 @@
 
     <script src="languages.js"></script>
     <script src="script.js"></script>
+
+    <!-- إضافة نافذة تأكيد الحذف -->
+    <div class="pg-confirm-dialog" id="confirmDialog">
+        <div class="pg-confirm-content">
+            <h3>Clear History</h3>
+            <p>Are you sure you want to clear all password history?</p>
+            <div class="pg-confirm-actions">
+                <button class="pg-confirm-cancel" onclick="hideConfirmDialog()">Cancel</button>
+                <button class="pg-confirm-delete" onclick="confirmClearHistory()">Clear</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 

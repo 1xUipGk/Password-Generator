@@ -545,7 +545,7 @@ body {
     overflow: hidden;
 }
 
-/* إضافة الأقسام الثلاثة */
+/* إضافة الأقسا�� الثلاثة */
 .pg-strength__section {
     flex: 1;
     margin: 0 1px;
@@ -1009,7 +1009,7 @@ body {
 }
 
 [data-theme="light"] .pg-arrow-icon {
-    color: #5f6368; /* لون السهم في الوضع الفاتح */
+    color: #5f6368; /* ون السهم في الوضع الفاتح */
 }
 
 /* تحديث الخطوط */
@@ -1082,4 +1082,246 @@ body {
 .pg-settings-symbols__input::placeholder {
     color: var(--pg-text-secondary);
     opacity: 0.5;
+}
+
+/* أنماط زر وقائمة السجل */
+.pg-history-btn {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    color: var(--pg-text);
+    transition: all 0.3s ease;
+}
+
+.pg-history-btn:hover {
+    background-color: var(--pg-hover-bg);
+}
+
+.pg-history-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--pg-bg);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pg-history-list.active {
+    transform: translateX(0);
+}
+
+.pg-history-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--pg-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pg-clear-history {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: var(--pg-border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    height: 42px;
+}
+
+.pg-clear-history:hover {
+    background-color: #c82333;
+}
+
+.pg-clear-history:active {
+    transform: scale(0.98);
+}
+
+.pg-clear-history svg {
+    width: 18px;
+    height: 18px;
+}
+
+.pg-history-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    height: calc(100vh - 180px);
+    max-height: calc(100% - 120px);
+}
+
+.pg-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--pg-secondary-bg);
+    border-radius: var(--pg-border-radius);
+    margin-bottom: 0.5rem;
+}
+
+.pg-history-password {
+    color: var(--pg-text);
+    font-family: monospace;
+    font-size: 0.875rem;
+}
+
+.pg-history-copy {
+    background: none;
+    border: none;
+    color: var(--pg-text);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.pg-history-copy:hover {
+    background-color: var(--pg-hover-bg);
+}
+
+.pg-history-date {
+    color: var(--pg-text-secondary);
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+/* تحديث أنماط تذييل السجل وزر التنظيف */
+.pg-history-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--pg-border);
+    background-color: var(--pg-bg);
+    position: sticky;
+    bottom: 0;
+}
+
+.pg-clear-history {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: var(--pg-border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    height: 42px;
+}
+
+.pg-clear-history:hover {
+    background-color: #c82333;
+}
+
+.pg-clear-history:active {
+    transform: scale(0.98);
+}
+
+.pg-clear-history svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* تحديث محتوى السجل للتناسق مع الزر الجديد */
+.pg-history-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    height: calc(100vh - 180px);
+    max-height: calc(100% - 120px);
+}
+
+.pg-history-copy svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* أنماط نافذة التأكيد */
+.pg-confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pg-confirm-dialog.active {
+    display: flex;
+}
+
+.pg-confirm-content {
+    background-color: var(--pg-bg);
+    padding: 1.5rem;
+    border-radius: var(--pg-border-radius);
+    max-width: 300px;
+    width: 90%;
+}
+
+.pg-confirm-content h3 {
+    margin: 0 0 1rem;
+    color: var(--pg-text);
+    font-size: 1.25rem;
+}
+
+.pg-confirm-content p {
+    margin: 0 0 1.5rem;
+    color: var(--pg-text-secondary);
+    font-size: 0.875rem;
+}
+
+.pg-confirm-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.pg-confirm-cancel,
+.pg-confirm-delete {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--pg-border-radius);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.pg-confirm-cancel {
+    background-color: var(--pg-secondary-bg);
+    color: var(--pg-text);
+}
+
+.pg-confirm-cancel:hover {
+    background-color: var(--pg-hover-bg);
+}
+
+.pg-confirm-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.pg-confirm-delete:hover {
+    background-color: #c82333;
 }
