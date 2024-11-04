@@ -205,28 +205,25 @@
                 <!-- خيار الوضع المظلم -->
                 <div class="pg-settings-item">
                     <label>Dark Mode</label>
-                    <label class="pg-switch">
-                        <input type="checkbox" id="darkMode" onchange="toggleTheme()">
-                        <span class="pg-switch-slider"></span>
-                    </label>
+                    <div class="pg-switch" onclick="toggleTheme()" id="darkModeSwitch">
+                        <div class="pg-switch-slider"></div>
+                    </div>
                 </div>
 
                 <!-- خيار التوليد التلقائي -->
                 <div class="pg-settings-item">
                     <label>Auto Generate</label>
-                    <label class="pg-switch">
-                        <input type="checkbox" id="autoGenerate" checked>
-                        <span class="pg-switch-slider"></span>
-                    </label>
+                    <div class="pg-switch" onclick="toggleAutoGenerate()" id="autoGenerateSwitch">
+                        <div class="pg-switch-slider"></div>
+                    </div>
                 </div>
 
                 <!-- خيار إظهار شريط القوة -->
                 <div class="pg-settings-item">
                     <label>Show Strength Bar</label>
-                    <label class="pg-switch">
-                        <input type="checkbox" id="showStrengthBar" checked>
-                        <span class="pg-switch-slider"></span>
-                    </label>
+                    <div class="pg-switch" onclick="toggleStrengthBar()" id="strengthBarSwitch">
+                        <div class="pg-switch-slider"></div>
+                    </div>
                 </div>
 
                 <!-- خيار طول كلمة المرور الافتراضي -->

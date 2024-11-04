@@ -198,21 +198,86 @@ function initTheme() {
     }
 }
 
-// تحديث دالة تبديل الوضع
+// دوال التبديل الجديدة
 function toggleTheme() {
-    const darkModeToggle = document.getElementById('darkMode');
-    const newTheme = darkModeToggle.checked ? 'dark' : 'light';
+    const switchElement = document.getElementById('darkModeSwitch');
+    switchElement.classList.toggle('active');
+    const isDark = switchElement.classList.contains('active');
     
-    document.documentElement.setAttribute('data-theme', newTheme);
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
     
-    // تحديث الإعدادات في localStorage
+    // حفظ الإعداد
     const settings = JSON.parse(localStorage.getItem('settings') || '{}');
-    settings.theme = newTheme;
+    settings.theme = isDark ? 'dark' : 'light';
     localStorage.setItem('settings', JSON.stringify(settings));
 }
 
-// تهيئة الوضع عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', initTheme);
+function toggleAutoGenerate() {
+    const switchElement = document.getElementById('autoGenerateSwitch');
+    switchElement.classList.toggle('active');
+    const isActive = switchElement.classList.contains('active');
+    
+    // حفظ الإعداد
+    const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+    settings.autoGenerate = isActive;
+    localStorage.setItem('settings', JSON.stringify(settings));
+    
+    if (isActive) {
+        generatePassword();
+    }
+}
+
+function toggleStrengthBar() {
+    const switchElement = document.getElementById('strengthBarSwitch');
+    switchElement.classList.toggle('active');
+    const isActive = switchElement.classList.contains('active');
+    
+    const strengthBar = document.querySelector('.pg-strength');
+    strengthBar.style.display = isActive ? 'block' : 'none';
+    
+    // حفظ الإعداد
+    const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+    settings.showStrengthBar = isActive;
+    localStorage.setItem('settings', JSON.stringify(settings));
+}
+
+// تحديث دالة loadSettings
+function loadSettings() {
+    const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+    
+    // تحميل اللغة
+    const savedLanguage = settings.language || 'en';
+    changeLanguage(savedLanguage);
+
+    // تحميل حالة الـ switches
+    if (settings.theme === 'dark') {
+        document.getElementById('darkModeSwitch').classList.add('active');
+    }
+    
+    if (settings.autoGenerate !== false) {
+        document.getElementById('autoGenerateSwitch').classList.add('active');
+    }
+    
+    if (settings.showStrengthBar !== false) {
+        document.getElementById('strengthBarSwitch').classList.add('active');
+    } else {
+        document.querySelector('.pg-strength').style.display = 'none';
+    }
+
+    // تحميل باقي الإعدادات
+    if (settings.defaultLength) {
+        document.getElementById('defaultLength').value = settings.defaultLength;
+        document.getElementById('length').value = settings.defaultLength;
+        document.getElementById('lengthNumber').value = settings.defaultLength;
+    }
+
+    if (settings.customSymbols) {
+        document.getElementById('customSymbols').value = settings.customSymbols;
+    }
+
+    // تطبيق الثيم
+    document.documentElement.setAttribute('data-theme', settings.theme || 'light');
+}
 
 // إضاف دالة تقييم قوة كلمة السر
 function updatePasswordStrength(password) {
@@ -269,6 +334,7 @@ function toggleSettings() {
     sidebar.classList.toggle('active');
 }
 
+// تحديث دالة تغيير اللغة
 function changeLanguage(lang) {
     const languages = {
         'en': { name: 'English', flag: 'gb' },
@@ -361,86 +427,10 @@ function saveSettings() {
     localStorage.setItem('settings', JSON.stringify(settings));
 }
 
-// تحميل الإعدادات
-function loadSettings() {
-    const settings = JSON.parse(localStorage.getItem('settings') || '{}');
-    
-    // تحميل اللغة وتطبيقها
-    const savedLanguage = settings.language || 'en';
-    document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
-    updateLanguage(savedLanguage);
-
-    // تحميل حالة التوليد التلقائي
-    const autoGenerate = document.getElementById('autoGenerate');
-    autoGenerate.checked = settings.autoGenerate !== undefined ? settings.autoGenerate : true;
-
-    // تحميل حالة شريط القوة
-    const showStrengthBar = document.getElementById('showStrengthBar');
-    showStrengthBar.checked = settings.showStrengthBar !== undefined ? settings.showStrengthBar : true;
-
-    // تحميل حالة الوضع المظلم
-    const darkMode = document.getElementById('darkMode');
-    darkMode.checked = settings.theme === 'dark';
-
-    // تطبيق التأثيرات المرئية مباشرة
-    if (!showStrengthBar.checked) {
-        document.querySelector('.pg-strength').style.display = 'none';
-    }
-
-    // تحديث حالة الـ switch-slider
-    document.querySelectorAll('.pg-switch input[type="checkbox"]').forEach(checkbox => {
-        const storedValue = settings[checkbox.id];
-        if (storedValue !== undefined) {
-            checkbox.checked = storedValue;
-        }
-    });
-
-    // حفظ الإعدادات الأولية إذا لم تكن موجودة
-    if (!localStorage.getItem('settings')) {
-        saveSettings();
-    }
-
-    // تحميل الطول الافتراضي
-    const defaultLength = document.getElementById('defaultLength');
-    if (settings.defaultLength) {
-        defaultLength.value = settings.defaultLength;
-        document.getElementById('length').value = settings.defaultLength;
-        document.getElementById('lengthNumber').value = settings.defaultLength;
-    }
-
-    // تحميل الرموز المخصصة
-    const customSymbols = document.getElementById('customSymbols');
-    if (settings.customSymbols) {
-        customSymbols.value = settings.customSymbols;
-    }
-}
-
-// تحديث التوليد التلقائي
-document.getElementById('autoGenerate').addEventListener('change', function() {
-    if (!this.checked) {
-        console.log('Auto generate disabled');
-    } else {
-        generatePassword();
-        console.log('Auto generate enabled');
-    }
-    saveSettings();
-});
-
-// تحديث إظهار شريط القوة
-document.getElementById('showStrengthBar').addEventListener('change', function() {
-    const strengthBar = document.querySelector('.pg-strength');
-    strengthBar.style.display = this.checked ? 'block' : 'none';
-    saveSettings();
-});
-
 // تحميل الإعدادات عند بدء التطبيق
 document.addEventListener('DOMContentLoaded', () => {
     loadSettings();
     initTheme();
-    
-    // تحميل اللغة المحفوظة
-    const savedLanguage = localStorage.getItem('language') || 'en';
-    changeLanguage(savedLanguage);
 });
 
 // دوال تغيير اللغة

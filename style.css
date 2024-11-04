@@ -720,47 +720,42 @@ body {
 /* تنسيق مفتاح التبديل */
 .pg-switch {
     position: relative;
-    display: inline-block;
     width: 44px;
     height: 24px;
+    background-color: var(--pg-secondary-bg);
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.pg-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+.pg-switch.active {
+    background-color: var(--pg-primary);
 }
 
 .pg-switch-slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--pg-secondary-bg);
-    transition: .3s;
-    border-radius: 34px;
-}
-
-.pg-switch-slider:before {
     position: absolute;
     content: "";
     height: 18px;
     width: 18px;
     left: 3px;
-    bottom: 3px;
+    top: 3px;
     background-color: var(--pg-text);
-    transition: .3s;
     border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
-.pg-switch input:checked + .pg-switch-slider {
-    background-color: var(--pg-primary);
-}
-
-.pg-switch input:checked + .pg-switch-slider:before {
+.pg-switch.active .pg-switch-slider {
     transform: translateX(20px);
+    background-color: white;
+}
+
+/* تحسين مظهر التفاعل */
+.pg-switch:hover {
+    opacity: 0.9;
+}
+
+.pg-switch:active .pg-switch-slider {
+    width: 22px;
 }
 
 /* زر إعادة الضبط */
