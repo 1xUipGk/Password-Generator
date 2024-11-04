@@ -380,7 +380,7 @@ function toggleSettings() {
 function changeLanguage(lang) {
     const languages = {
         'en': { name: 'English', flag: 'gb' },
-        'ar': { name: 'اعربية', flag: 'sa' },
+        'ar': { name: 'العربية', flag: 'sa' },
         'fr': { name: 'Français', flag: 'fr' },
         'es': { name: 'Español', flag: 'es' },
         'de': { name: 'Deutsch', flag: 'de' },
