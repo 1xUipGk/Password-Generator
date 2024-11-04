@@ -325,23 +325,51 @@ body {
 /* Footer */
 .pg-footer {
     margin-top: auto;
-    padding: 1rem;
+    padding: 1.5rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pg-footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.pg-footer-links a {
+    color: var(--pg-text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+
+.pg-footer-links a:hover {
+    color: var(--pg-primary);
+}
+
+.pg-footer-separator {
+    color: var(--pg-text-secondary);
+    font-size: 0.875rem;
 }
 
 .pg-footer p {
-    color: #ccc;
-    font-size: 0.75rem;
+    color: var(--pg-text-secondary);
+    font-size: 0.875rem;
     margin: 0;
 }
 
-.pg-footer a {
-    color: var(--pg-text);
+.pg-footer-link {
+    color: var(--pg-primary) !important;
     text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
 }
 
-.pg-footer a:hover {
-    text-decoration: underline;
+.pg-footer-link:hover {
+    opacity: 0.8;
 }
 
 /* Animations */
@@ -545,7 +573,7 @@ body {
     overflow: hidden;
 }
 
-/* إضافة الأقسا�� الثلاثة */
+/* إضافة الأقسا الثلاثة */
 .pg-strength__section {
     flex: 1;
     margin: 0 1px;
@@ -1324,4 +1352,220 @@ body {
 
 .pg-confirm-delete:hover {
     background-color: #c82333;
+}
+
+/* أنماط نافذة الخصوصية والشروط */
+.pg-privacy-terms {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.pg-privacy-terms.active {
+    display: flex;
+}
+
+.pg-privacy-terms-content {
+    background-color: var(--pg-bg);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    border-radius: var(--pg-border-radius);
+    display: flex;
+    flex-direction: column;
+}
+
+.pg-privacy-terms-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--pg-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pg-privacy-terms-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--pg-text);
+}
+
+.pg-privacy-close {
+    background: none;
+    border: none;
+    color: var(--pg-text);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pg-privacy-close:hover {
+    background-color: var(--pg-hover-bg);
+}
+
+.pg-privacy-terms-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    color: var(--pg-text);
+}
+
+.pg-privacy-terms-body section {
+    margin-bottom: 2rem;
+}
+
+.pg-privacy-terms-body h3 {
+    margin: 0 0 1rem;
+    font-size: 1.125rem;
+}
+
+.pg-privacy-terms-body h4 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1rem;
+}
+
+.pg-privacy-terms-body p {
+    margin: 0 0 1rem;
+    line-height: 1.5;
+    color: var(--pg-text-secondary);
+}
+
+.pg-privacy-terms-body ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.pg-privacy-terms-body li {
+    margin-bottom: 0.5rem;
+    color: var(--pg-text-secondary);
+}
+
+/* أنماط روابط Footer */
+.pg-footer-links {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.pg-footer-separator {
+    color: var(--pg-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* أنماط مشتركة للنوافذ */
+.pg-privacy,
+.pg-terms {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.pg-privacy.active,
+.pg-terms.active {
+    display: flex;
+}
+
+.pg-privacy-content,
+.pg-terms-content {
+    background-color: var(--pg-bg);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    border-radius: var(--pg-border-radius);
+    display: flex;
+    flex-direction: column;
+}
+
+.pg-privacy-header,
+.pg-terms-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--pg-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pg-privacy-header h2,
+.pg-terms-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--pg-text);
+}
+
+.pg-privacy-close,
+.pg-terms-close {
+    background: none;
+    border: none;
+    color: var(--pg-text);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pg-privacy-close:hover,
+.pg-terms-close:hover {
+    background-color: var(--pg-hover-bg);
+}
+
+.pg-privacy-body,
+.pg-terms-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    color: var(--pg-text);
+}
+
+.pg-privacy-body section,
+.pg-terms-body section {
+    margin-bottom: 2rem;
+}
+
+.pg-privacy-body h3,
+.pg-terms-body h3 {
+    margin: 0 0 1rem;
+    font-size: 1.125rem;
+}
+
+.pg-privacy-body h4,
+.pg-terms-body h4 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1rem;
+}
+
+.pg-privacy-body p,
+.pg-terms-body p {
+    margin: 0 0 1rem;
+    line-height: 1.5;
+    color: var(--pg-text-secondary);
+}
+
+.pg-privacy-body ul,
+.pg-terms-body ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.pg-privacy-body li,
+.pg-terms-body li {
+    margin-bottom: 0.5rem;
+    color: var(--pg-text-secondary);
 }

@@ -8,20 +8,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         
         checkbox.addEventListener('change', () => {
-            if (mainOptions.includes(checkbox.id) && document.getElementById('autoGenerate').checked) {
+            const maxLength = calculateMaxLength();
+            updateMaxLengthDisplay(maxLength);
+            
+            if (mainOptions.includes(checkbox.id) && document.getElementById('autoGenerateSwitch').classList.contains('active')) {
                 generatePassword();
             }
             
-            if (mainOptions.includes(checkbox.id)) {
+            if (['lowercase', 'uppercase', 'numbers', 'symbols'].includes(checkbox.id)) {
                 handleMainOptionsChange();
             }
-            if (checkbox.id === 'excludeDuplicate') {
-                animateRangeUpdate();
-            }
+            
+            animateRangeUpdate();
         });
     });
 
     function handleMainOptionsChange() {
+        const mainOptions = ['lowercase', 'uppercase', 'numbers', 'symbols'];
         const checkedCount = mainOptions.filter(id => 
             document.getElementById(id).checked
         ).length;
@@ -63,6 +66,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                 if (progress < 1) {
                     requestAnimationFrame(animate);
+                } else if (document.getElementById('autoGenerateSwitch').classList.contains('active')) {
+                    generatePassword();
                 }
             }
 
@@ -105,17 +110,34 @@ function calculateMaxLength() {
     let maxLength = 0;
     const excludeDuplicate = document.getElementById('excludeDuplicate').checked;
 
+    // حساب مجموع الأحرف المتاحة
+    let availableChars = 0;
+    if (document.getElementById('lowercase').checked) availableChars += 26;
+    if (document.getElementById('uppercase').checked) availableChars += 26;
+    if (document.getElementById('numbers').checked) availableChars += 10;
+    if (document.getElementById('symbols').checked) {
+        const customSymbols = document.getElementById('customSymbols').value;
+        availableChars += customSymbols ? new Set(customSymbols).size : 5;
+    }
+    if (document.getElementById('includeSpaces').checked) availableChars += 1;
+
     if (excludeDuplicate) {
-        if (document.getElementById('lowercase').checked) maxLength += 26;
-        if (document.getElementById('uppercase').checked) maxLength += 26;
-        if (document.getElementById('numbers').checked) maxLength += 10;
-        if (document.getElementById('symbols').checked) maxLength += 5;
-        if (document.getElementById('includeSpaces').checked) maxLength += 1;
+        // إذا كان منع التكرار مفعلاً، الحد الأقصى هو عدد الأحرف المتاحة
+        maxLength = availableChars;
     } else {
-        maxLength = 128;
+        // إذا كان التكرار مسموحاً، نزيد الحد الأقصى بناءً على عدد الخيارات المحددة
+        let selectedOptions = 0;
+        if (document.getElementById('lowercase').checked) selectedOptions++;
+        if (document.getElementById('uppercase').checked) selectedOptions++;
+        if (document.getElementById('numbers').checked) selectedOptions++;
+        if (document.getElementById('symbols').checked) selectedOptions++;
+        if (document.getElementById('includeSpaces').checked) selectedOptions++;
+
+        // زيادة الحد الأقصى بناءً على عدد الخيارات المحددة
+        maxLength = Math.min(128, 20 * selectedOptions);
     }
 
-    return maxLength;
+    return Math.max(maxLength, 3);
 }
 
 function easeOutCubic(x) {
@@ -298,7 +320,7 @@ function loadSettings() {
     document.documentElement.setAttribute('data-theme', settings.theme || 'light');
 }
 
-// إضاف دالة تقييم قوة كلمة السر
+// تحديث دالة تقييم قوة كلمة السر
 function updatePasswordStrength(password) {
     const strengthContainer = document.querySelector('.pg-strength');
     const strengthBar = document.querySelector('.pg-strength__bar');
@@ -318,21 +340,22 @@ function updatePasswordStrength(password) {
     if (/[^A-Za-z0-9]/.test(password)) strength += 1;
     
     let strengthLevel = '';
-    let strengthMessage = '';
     
     if (strength <= 2) {
         strengthLevel = 'weak';
-        strengthMessage = 'Weak password';
+        strengthBar.classList.add('weak');
     } else if (strength <= 4) {
         strengthLevel = 'medium';
-        strengthMessage = 'Medium password';
+        strengthBar.classList.add('medium');
     } else {
         strengthLevel = 'strong';
-        strengthMessage = 'Strong password';
+        strengthBar.classList.add('strong');
     }
     
-    strengthBar.classList.add(strengthLevel);
-    strengthText.textContent = strengthMessage;
+    // استخدام الترجمات لعرض النص
+    const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+    const currentLang = settings.language || 'en';
+    strengthText.textContent = translations[currentLang].strength[strengthLevel];
 }
 
 // إضافة مستمع الأحداث للضغط على الشريط
@@ -357,7 +380,7 @@ function toggleSettings() {
 function changeLanguage(lang) {
     const languages = {
         'en': { name: 'English', flag: 'gb' },
-        'ar': { name: 'العربية', flag: 'sa' },
+        'ar': { name: 'اعربية', flag: 'sa' },
         'fr': { name: 'Français', flag: 'fr' },
         'es': { name: 'Español', flag: 'es' },
         'de': { name: 'Deutsch', flag: 'de' },
@@ -405,7 +428,7 @@ function resetSettings() {
     // إعادة ضبط الرموز المخصصة (تفريغ الحقل)
     document.getElementById('customSymbols').value = '';
     
-    // تطبيق التغييرات
+    // تط��يق التغييرات
     if (document.getElementById('autoGenerate').checked) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(checkbox => {
@@ -495,7 +518,7 @@ document.getElementById('customSymbols').addEventListener('input', function() {
     settings.customSymbols = this.value;
     localStorage.setItem('settings', JSON.stringify(settings));
     
-    // توليد كلمة مرور جديدة إذا كان التوليد التلقائي مفعل
+    // توليد كلمة مرور جديدة إذا كان التوليد التققائي مفعل
     if (document.getElementById('autoGenerate').checked) {
         generatePassword();
     }
@@ -511,7 +534,7 @@ document.getElementById('showStrengthBar').addEventListener('change', function()
     const strengthBar = document.querySelector('.pg-strength');
     strengthBar.style.display = this.checked ? 'block' : 'none';
     saveSettings();
-}); // لا يولد كلمة مرور
+}); // لا يلد كلمة مرور
 
 document.getElementById('defaultLength').addEventListener('input', function() {
     let value = parseInt(this.value) || 3;
@@ -684,4 +707,123 @@ function disableAutoGenerate() {
     lengthInputs.forEach(input => {
         input.removeEventListener('input', generatePassword);
     });
+}
+
+// دوال التحكم في نافذة الخصوصية والشروط
+function showPrivacy() {
+    document.getElementById('privacy').classList.add('active');
+}
+
+function hidePrivacy() {
+    document.getElementById('privacy').classList.remove('active');
+}
+
+function showTerms() {
+    document.getElementById('terms').classList.add('active');
+}
+
+function hideTerms() {
+    document.getElementById('terms').classList.remove('active');
+}
+
+// إضافة مستمعات لإغلاق النوافذ عند النقر خارجها
+document.getElementById('privacy').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hidePrivacy();
+    }
+});
+
+document.getElementById('terms').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hideTerms();
+    }
+});
+
+// إضافة مستمع لتغييرات الخيارات التي تؤثر على الحد الأقصى
+window.addEventListener('DOMContentLoaded', (event) => {
+    // الخيارات التي تؤثر على الحد الأقصى
+    const affectingOptions = [
+        'lowercase',
+        'uppercase', 
+        'numbers', 
+        'symbols',
+        'excludeDuplicate'
+    ];
+    
+    // إضافة مستمعات للخيارات
+    affectingOptions.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', () => {
+                updateMaxLengthDisplay(calculateMaxLength());
+                animateRangeUpdate();
+            });
+        }
+    });
+
+    // مستمع لتغييرات الرموز المخصصة
+    const customSymbolsInput = document.getElementById('customSymbols');
+    if (customSymbolsInput) {
+        customSymbolsInput.addEventListener('input', () => {
+            if (document.getElementById('symbols').checked) {
+                updateMaxLengthDisplay(calculateMaxLength());
+                animateRangeUpdate();
+            }
+        });
+    }
+});
+
+// تحديث دالة updateMaxLengthDisplay
+function updateMaxLengthDisplay(maxLength) {
+    const lengthRange = document.getElementById('length');
+    const lengthNumber = document.getElementById('lengthNumber');
+    
+    // تحديث الحد الأقصى للعناصر
+    lengthRange.max = maxLength;
+    lengthNumber.max = maxLength;
+
+    // تحديث القيمة الحالية إذا كانت أكبر من الحد الأقصى الجديد
+    if (parseInt(lengthRange.value) > maxLength) {
+        lengthRange.value = maxLength;
+        lengthNumber.value = maxLength;
+        if (document.getElementById('autoGenerateSwitch').classList.contains('active')) {
+            generatePassword();
+        }
+    }
+
+    // حساب وعرض معلومات الأحرف المتاحة
+    const availableChars = calculateAvailableCharacters();
+    const totalChars = availableChars.reduce((sum, type) => {
+        switch(type) {
+            case 'a-z': return sum + 26;
+            case 'A-Z': return sum + 26;
+            case '0-9': return sum + 10;
+            case 'space': return sum + 1;
+            default: return sum + (type.startsWith('symbols:') ? 
+                new Set(type.replace('symbols:', '')).size : 5);
+        }
+    }, 0);
+
+    // عرض معلومات التحديث في وحدة التحكم
+    console.log({
+        maxLength,
+        totalAvailableCharacters: totalChars,
+        currentLength: lengthRange.value,
+        availableCharacterTypes: availableChars,
+        excludeDuplicate: document.getElementById('excludeDuplicate').checked
+    });
+}
+
+// دالة محسنة لحساب الأحرف المتاحة
+function calculateAvailableCharacters() {
+    let chars = [];
+    if (document.getElementById('lowercase').checked) chars.push('a-z');
+    if (document.getElementById('uppercase').checked) chars.push('A-Z');
+    if (document.getElementById('numbers').checked) chars.push('0-9');
+    if (document.getElementById('symbols').checked) {
+        const customSymbols = document.getElementById('customSymbols').value;
+        chars.push(`symbols:${customSymbols || '!-$^+'}`);
+    }
+    if (document.getElementById('includeSpaces').checked) chars.push('space');
+    return chars;
 }

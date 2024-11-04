@@ -204,7 +204,7 @@
 
                 <!-- خيار الوضع المظلم -->
                 <div class="pg-settings-item">
-                    <label>Dark Mode</label>
+                    <label data-key="darkMode">Dark Mode</label>
                     <div class="pg-switch" onclick="toggleTheme()" id="darkModeSwitch">
                         <div class="pg-switch-slider"></div>
                     </div>
@@ -212,7 +212,7 @@
 
                 <!-- خيار التوليد التلقائي -->
                 <div class="pg-settings-item">
-                    <label>Auto Generate</label>
+                    <label data-key="autoGenerate">Auto Generate</label>
                     <div class="pg-switch" onclick="toggleAutoGenerate()" id="autoGenerateSwitch">
                         <div class="pg-switch-slider"></div>
                     </div>
@@ -220,7 +220,7 @@
 
                 <!-- خيار إظهار شريط القوة -->
                 <div class="pg-settings-item">
-                    <label>Show Strength Bar</label>
+                    <label data-key="showStrengthBar">Show Strength Bar</label>
                     <div class="pg-switch" onclick="toggleStrengthBar()" id="strengthBarSwitch">
                         <div class="pg-switch-slider"></div>
                     </div>
@@ -228,7 +228,7 @@
 
                 <!-- خيار طول كلمة المرور الافتراضي -->
                 <div class="pg-settings-item">
-                    <label>Default Length</label>
+                    <label data-key="defaultLength">Default Length</label>
                     <div class="pg-settings-length">
                         <input type="number" 
                                id="defaultLength" 
@@ -241,7 +241,7 @@
 
                 <!-- خيار الرموز المخصصة -->
                 <div class="pg-settings-item">
-                    <label>Custom Symbols</label>
+                    <label data-key="customSymbols">Custom Symbols</label>
                     <div class="pg-settings-symbols">
                         <input type="text" 
                                id="customSymbols" 
@@ -253,7 +253,7 @@
 
                 <!-- إضافة زر السجل في قائمة الإعدادات -->
                 <div class="pg-settings-item">
-                    <label>Password History</label>
+                    <label data-key="history">Password History</label>
                     <div class="pg-history-btn" onclick="togglePasswordHistory()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M13.5 8H12v5l4.28 2.54l.72-1.21l-3.5-2.08V8M13 3a9 9 0 0 0-9 9H1l3.96 4.03L9 12H6a7 7 0 0 1 7-7a7 7 0 0 1 7 7a7 7 0 0 1-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.896 8.896 0 0 0 13 21a9 9 0 0 0 9-9a9 9 0 0 0-9-9"/>
@@ -293,6 +293,11 @@
     </div>
 
     <footer class="pg-footer">
+        <div class="pg-footer-links">
+            <a href="#" onclick="showPrivacy()">Privacy</a>
+            <span class="pg-footer-separator">•</span>
+            <a href="#" onclick="showTerms()">Terms of Service</a>
+        </div>
         <p>Created by <a href="https://www.instagram.com/3lismaeel/" target="_blank">@3lismaeel</a></p>
     </footer>
 
@@ -307,6 +312,69 @@
             <div class="pg-confirm-actions">
                 <button class="pg-confirm-cancel" onclick="hideConfirmDialog()">Cancel</button>
                 <button class="pg-confirm-delete" onclick="confirmClearHistory()">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الخصوصية -->
+    <div class="pg-privacy" id="privacy">
+        <div class="pg-privacy-content">
+            <div class="pg-privacy-header">
+                <h2>Privacy Policy</h2>
+                <button class="pg-privacy-close" onclick="hidePrivacy()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="pg-privacy-body">
+                <section>
+                    <h3>Privacy Policy</h3>
+                    <p>This Password Generator operates entirely in your browser. We do not collect, store, or transmit any of your passwords or personal information. All generated passwords and settings are stored locally on your device.</p>
+                    
+                    <h4>Local Storage</h4>
+                    <p>We use local storage to save your preferences and password history. This data never leaves your device and can be cleared at any time through your browser settings.</p>
+                    
+                    <h4>No Analytics</h4>
+                    <p>We do not use any analytics or tracking tools. Your privacy is our priority.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الشروط -->
+    <div class="pg-terms" id="terms">
+        <div class="pg-terms-content">
+            <div class="pg-terms-header">
+                <h2>Terms of Service</h2>
+                <button class="pg-terms-close" onclick="hideTerms()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="pg-terms-body">
+                <section>
+                    <h3>Terms of Service</h3>
+                    <p>By using this Password Generator, you agree to the following terms:</p>
+                    <ul>
+                        <li>The service is provided "as is" without any warranties.</li>
+                        <li>We are not responsible for any loss or damage resulting from using generated passwords.</li>
+                        <li>You are responsible for storing and managing your passwords securely.</li>
+                        <li>We recommend not using generated passwords for critical security applications without proper verification.</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h3>Security</h3>
+                    <p>While we strive to generate secure passwords, we recommend:</p>
+                    <ul>
+                        <li>Using different passwords for different accounts</li>
+                        <li>Regularly changing your passwords</li>
+                        <li>Using a reliable password manager</li>
+                        <li>Enabling two-factor authentication when possible</li>
+                    </ul>
+                </section>
             </div>
         </div>
     </div>
