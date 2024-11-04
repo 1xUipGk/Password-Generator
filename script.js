@@ -428,7 +428,7 @@ function resetSettings() {
     // إعادة ضبط الرموز المخصصة (تفريغ الحقل)
     document.getElementById('customSymbols').value = '';
     
-    // تط��يق التغييرات
+    // تطيق التغييرات
     if (document.getElementById('autoGenerate').checked) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(checkbox => {
@@ -826,4 +826,17 @@ function calculateAvailableCharacters() {
     }
     if (document.getElementById('includeSpaces').checked) chars.push('space');
     return chars;
+}
+
+// تسجيل Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
 }
