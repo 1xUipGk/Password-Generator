@@ -235,7 +235,7 @@ function toggleAutoGenerate() {
     const isActive = !switchElement.classList.contains('active');
     switchElement.classList.toggle('active');
     
-    // حفظ الإعداد
+    // حفظ الإعاد
     const settings = JSON.parse(localStorage.getItem('settings') || '{}');
     settings.autoGenerate = isActive;
     localStorage.setItem('settings', JSON.stringify(settings));
@@ -387,7 +387,7 @@ function changeLanguage(lang) {
         'tr': { name: 'Türkçe', flag: 'tr' }
     };
 
-    // تحديث العرض
+    // تحديث اعرض
     document.querySelector('.pg-current-language').textContent = languages[lang].name;
     document.getElementById('currentFlag').src = `https://flagcdn.com/w20/${languages[lang].flag}.png`;
     
@@ -840,3 +840,70 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// إضافة حماية ضد Developer Tools
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73)) {
+        e.preventDefault();
+    }
+});
+
+// منع الوصول للكود المصدري
+(function() {
+    // منع Developer Tools
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+        // منع Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, F12
+        if (
+            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
+            (e.ctrlKey && e.keyCode === 85) || 
+            e.keyCode === 123
+        ) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // منع عرض المصدر
+    document.addEventListener('keypress', e => {
+        if (e.ctrlKey && e.keyCode === 85) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // منع التحديد
+    document.addEventListener('selectstart', e => {
+        if (!e.target.matches('.pg-password__input')) {
+            e.preventDefault();
+        }
+    });
+
+    // منع السحب والإفلات
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('drop', e => e.preventDefault());
+
+    // تشفير الكود
+    const code = function() {
+        return Function.prototype.toString.call(this);
+    }.toString();
+    Object.defineProperty(Function.prototype, 'toString', {
+        value: function() {
+            return code;
+        },
+        writable: false
+    });
+
+    // منع console.log و debugging
+    const noop = () => {};
+    if (typeof window.console !== 'undefined') {
+        window.console = {
+            log: noop,
+            info: noop,
+            warn: noop,
+            error: noop,
+            debug: noop
+        };
+    }
+})();

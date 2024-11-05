@@ -2,18 +2,7 @@ const CACHE_NAME = 'password-generator-v1';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/style.css',
-    '/script.js',
-    '/languages.js',
-    '/manifest.json',
-    '/icons/icon-72x72.png',
-    '/icons/icon-96x96.png',
-    '/icons/icon-128x128.png',
-    '/icons/icon-144x144.png',
-    '/icons/icon-152x152.png',
-    '/icons/icon-192x192.png',
-    '/icons/icon-384x384.png',
-    '/icons/icon-512x512.png'
+    '/404.html'
 ];
 
 self.addEventListener('install', event => {
@@ -24,9 +13,41 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
+    // منع الوصول المباشر للملفات
+    const blockedExtensions = /\.(js|css|json|txt|xml)$/;
+    const allowedDomains = ['1xuipgk.github.io', 'flagcdn.com', 'fonts.googleapis.com', 'fonts.gstatic.com'];
+    
+    if (event.request.url.match(blockedExtensions)) {
+        const requestDomain = new URL(event.request.url).hostname;
+        if (!allowedDomains.some(domain => requestDomain.includes(domain))) {
+            event.respondWith(new Response('Access Denied', {
+                status: 403,
+                statusText: 'Forbidden'
+            }));
+            return;
+        }
+    }
+
+    // تشفير الاستجابة
     event.respondWith(
         caches.match(event.request)
-            .then(response => response || fetch(event.request))
+            .then(response => {
+                if (response) {
+                    return response;
+                }
+                return fetch(event.request).then(response => {
+                    // تشفير محتوى JavaScript
+                    if (event.request.url.endsWith('.js')) {
+                        return response.text().then(text => {
+                            const encrypted = btoa(text);
+                            return new Response(encrypted, {
+                                headers: { 'Content-Type': 'application/javascript' }
+                            });
+                        });
+                    }
+                    return response;
+                });
+            })
     );
 });
 

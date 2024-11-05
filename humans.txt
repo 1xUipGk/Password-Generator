@@ -1,8 +1,7 @@
 /* TEAM */
     Developer: @3lismaeel
-    Contact: contact@your-domain.com
     Instagram: @3lismaeel
-    From: Saudi Arabia
+    From: Bahrain
 
 /* SITE */
     Last update: 2024/03/20

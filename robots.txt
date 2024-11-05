@@ -1,19 +1,16 @@
 User-agent: *
-Allow: /
+Disallow: /script.js
+Disallow: /style.css
+Disallow: /languages.js
+Disallow: /service-worker.js
+Disallow: /.well-known/
+Disallow: /icons/
+Disallow: /*.json$
+Disallow: /*.txt$
+Disallow: /*.xml$
+
+Allow: /index.html
+Allow: /404.html
 Allow: /sitemap.xml
 
-# Disallow admin and system files
-Disallow: /cgi-bin/
-Disallow: /.git/
-Disallow: /.env
-Disallow: /wp-admin/
-Disallow: /wp-includes/
-Disallow: /wp-content/plugins/
-Disallow: /wp-content/themes/
-Disallow: /wp-content/cache/
-Disallow: /wp-json/
-Disallow: /xmlrpc.php
-Disallow: /readme.html
-
-# Sitemap location
-Sitemap: https://your-domain.com/sitemap.xml 
+Sitemap: https://1xuipgk.github.io/Password-Generator/sitemap.xml
