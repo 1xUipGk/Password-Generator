@@ -1,0 +1,5 @@
+Contact: https://github.com/1xUipGk/Password-Generator/issues
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en, ar
+Canonical: https://1xuipgk.github.io/Password-Generator/.well-known/security.txt
+Policy: https://1xuipgk.github.io/Password-Generator/
