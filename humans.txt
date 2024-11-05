@@ -1,0 +1,11 @@
+/* TEAM */
+    Developer: @3lismaeel
+    Contact: contact@your-domain.com
+    Instagram: @3lismaeel
+    From: Saudi Arabia
+
+/* SITE */
+    Last update: 2024/03/20
+    Language: English / Arabic / French / Spanish / German / Turkish
+    Doctype: HTML5
+    IDE: VS Code 
