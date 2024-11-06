@@ -8,21 +8,18 @@
     <meta name="author" content="@3lismaeel">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://your-domain.com/">
     <meta property="og:title" content="Password Generator - Create Strong & Secure Passwords">
     <meta property="og:description" content="Generate strong and secure passwords instantly with our free online password generator. Customize length, include symbols, numbers, and more.">
     <meta property="og:image" content="https://your-domain.com/path-to-image.jpg">
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:url" content="https://passgen.3lismaeel.xyz/">
     <meta property="twitter:title" content="Password Generator - Create Strong & Secure Passwords">
     <meta property="twitter:description" content="Generate strong and secure passwords instantly with our free online password generator. Customize length, include symbols, numbers, and more.">
-    <meta property="twitter:image" content="https://your-domain.com/path-to-image.jpg">
+    <meta property="twitter:image" content="https://passgen.3lismaeel.xyz/path-to-image.jpg">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
     
     <title>Password Generator - Create Strong & Secure Passwords</title>
@@ -30,7 +27,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="normalize.css">
 
-    <!-- Schema.org markup for Google -->
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -49,7 +45,6 @@
     </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2483356787883943"
      crossorigin="anonymous"></script>
-    <!-- إضافة في head -->
     <meta name="theme-color" content="#202124">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -60,13 +55,11 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512x512.png">
 
-    <!-- إضافة في head -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.google-analytics.com *.google.com *.gstatic.com *.googleapis.com flagcdn.com;">
     <meta name="referrer" content="no-referrer">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     
-    <!-- منع الوصول للملفات -->
     <script>
         if(window.top !== window.self) window.top.location.replace(window.self.location.href);
         document.onkeydown = function(e) {
@@ -143,14 +136,12 @@
 
         <button onclick="generatePassword()" class="pg-generate">Generate Password</button>
 
-        <!-- زر الإعدادات -->
         <button class="pg-settings-btn" onclick="toggleSettings()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65c-.04-.24-.25-.42-.5-.42h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/>
             </svg>
         </button>
 
-        <!-- قائمة الإعدادات الجانبية -->
         <div class="pg-settings-sidebar" id="settingsSidebar">
             <div class="pg-settings-header">
                 <h2>Settings</h2>
@@ -162,7 +153,6 @@
             </div>
             
             <div class="pg-settings-content">
-                <!-- خيار اللغة -->
                 <div class="pg-settings-item pg-language-selector" onclick="showLanguages()">
                     <div class="pg-language-info">
                         <span class="pg-language-label">Language</span>
@@ -176,7 +166,6 @@
                     </div>
                 </div>
 
-                <!-- قائمة اللغات -->
                 <div class="pg-languages-list" id="languagesList">
                     <div class="pg-languages-header">
                         <button class="pg-back-btn" onclick="hideLanguages()">
@@ -232,7 +221,6 @@
                     </div>
                 </div>
 
-                <!-- خيار الوضع المظلم -->
                 <div class="pg-settings-item">
                     <label data-key="darkMode">Dark Mode</label>
                     <div class="pg-switch" onclick="toggleTheme()" id="darkModeSwitch">
@@ -240,7 +228,6 @@
                     </div>
                 </div>
 
-                <!-- خيار التوليد التلقائي -->
                 <div class="pg-settings-item">
                     <label data-key="autoGenerate">Auto Generate</label>
                     <div class="pg-switch" onclick="toggleAutoGenerate()" id="autoGenerateSwitch">
@@ -248,7 +235,6 @@
                     </div>
                 </div>
 
-                <!-- خيار إظهار شريط القوة -->
                 <div class="pg-settings-item">
                     <label data-key="showStrengthBar">Show Strength Bar</label>
                     <div class="pg-switch" onclick="toggleStrengthBar()" id="strengthBarSwitch">
@@ -256,7 +242,6 @@
                     </div>
                 </div>
 
-                <!-- خيار طول كلمة المرور الافتراضي -->
                 <div class="pg-settings-item">
                     <label data-key="defaultLength">Default Length</label>
                     <div class="pg-settings-length">
@@ -269,7 +254,6 @@
                     </div>
                 </div>
 
-                <!-- خيار الرموز المخصصة -->
                 <div class="pg-settings-item">
                     <label data-key="customSymbols">Custom Symbols</label>
                     <div class="pg-settings-symbols">
@@ -281,7 +265,6 @@
                     </div>
                 </div>
 
-                <!-- إضافة زر السجل في قائمة الإعدادات -->
                 <div class="pg-settings-item">
                     <label data-key="history">Password History</label>
                     <div class="pg-history-btn" onclick="togglePasswordHistory()">
@@ -291,7 +274,6 @@
                     </div>
                 </div>
 
-                <!-- تحديث قائمة السجل -->
                 <div class="pg-history-list" id="historyList">
                     <div class="pg-history-header">
                         <button class="pg-back-btn" onclick="hidePasswordHistory()">
@@ -302,7 +284,6 @@
                         </button>
                     </div>
                     <div class="pg-history-content" id="historyContent">
-                        <!-- سيتم ملء هذا القسم ديناميكياً -->
                     </div>
                     <div class="pg-history-footer">
                         <button class="pg-clear-history" onclick="clearPasswordHistory()">
@@ -343,7 +324,6 @@
         </div>
     </div>
 
-    <!-- نافذة الخصوصية -->
     <div class="pg-privacy" id="privacy">
         <div class="pg-privacy-content">
             <div class="pg-privacy-header">
@@ -369,7 +349,6 @@
         </div>
     </div>
 
-    <!-- نافذة الشروط -->
     <div class="pg-terms" id="terms">
         <div class="pg-terms-content">
             <div class="pg-terms-header">
