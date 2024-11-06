@@ -518,7 +518,7 @@ document.getElementById('customSymbols').addEventListener('input', function() {
     settings.customSymbols = this.value;
     localStorage.setItem('settings', JSON.stringify(settings));
     
-    // توليد كلمة مرور جديدة إذا كان التوليد التققائي مفعل
+    // تو��يد كلمة مرور جديدة إذا كان التوليد التققائي مفعل
     if (document.getElementById('autoGenerate').checked) {
         generatePassword();
     }

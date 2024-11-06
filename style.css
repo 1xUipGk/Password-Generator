@@ -102,6 +102,7 @@ body {
     margin: 2rem auto;
     padding: 1.25rem;
     box-sizing: border-box;
+    margin-bottom: 110px;
 }
 
 /* Title */
@@ -537,7 +538,7 @@ body {
     }
 }
 
-/* تحديث لون الحواف في لوضع الفاتح */
+/* تحديث لون الحواف في لوع الفاتح */
 [data-theme="light"] .pg-option__checkbox {
     border-color: #3c404361;
 }
@@ -907,7 +908,7 @@ body {
     margin-bottom: 0;
 }
 
-/* تحديث لون الخلفية في الوضع الفاتح */
+/* تحديث لون الخلفية في الوضع لفاتح */
 [data-theme="light"] .pg-language-option {
     background-color: rgba(241, 243, 244, 0.5);
 }
@@ -1595,4 +1596,32 @@ img {
     -moz-user-modify: read-only !important;
     -ms-user-modify: read-only !important;
     user-modify: read-only !important;
+}
+
+/* أنماط الإعلانات */
+.ad-container {
+    width: 100%;
+    max-width: 728px;
+    margin: 2rem auto;
+    text-align: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* تحسين العرض على الشاشات الصغيرة */
+@media (max-width: 728px) {
+    .ad-container {
+        margin: 1.5rem auto;
+    }
+    
+    .ad-container ins {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 250px;
+    }
+}
+
+/* إزالة الهوامش السابقة */
+.pg-container {
+    margin-bottom: 2rem; /* تقليل الهامش السفلي */
 }

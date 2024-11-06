@@ -12,5 +12,8 @@ Disallow: /*.xml$
 Allow: /index.html
 Allow: /404.html
 Allow: /sitemap.xml
+Allow: /ads.txt
+Allow: /pagead/
+Allow: /google*.html
 
-Sitemap: https://1xuipgk.github.io/Password-Generator/sitemap.xml
+Sitemap: https://passgen.3lismaeel.xyz/sitemap.xml
